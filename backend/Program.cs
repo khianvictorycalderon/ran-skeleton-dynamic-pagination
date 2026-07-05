@@ -21,8 +21,14 @@ var app = builder.Build();
 // Middlewares
 app.UseCors();
 
-// Return a sample response
-app.MapGet("/api/data", () =>
+// Return a random initial 10 response
+app.MapGet("/api/data/initial", () =>
+{
+   return SampleData.Cards.Take(10);
+});
+
+// Return a sample response (For 1 only, when user scrolls)
+app.MapGet("/api/data/new", () =>
 {
    return SampleData.Cards[Random.Shared.Next(SampleData.Cards.Count)];
 });
