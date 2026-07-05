@@ -1,4 +1,8 @@
 # React + ASP NET Skeleton Loading + Dynamic Pagination
+Simulates a real newsfeed with infinite scrolling (sometimes called `DOOMSCROLLING`).
+
+## Preview
+![Preview](preview.png)
 
 #### Tech Stacks:
 - **Vite React (Typescript)**
