@@ -22,7 +22,7 @@ export default function App() {
     loading.current = true;
 
     // Show 10 skeletons
-    setCards(Array.from({ length: 10 }, () => ({})));
+    setCards(Array.from({ length: 5 }, () => ({})));
 
     try {
       const res = await fetch(`${API_URL}/api/data/initial`);
@@ -66,30 +66,21 @@ export default function App() {
 
   // Infinite scrolling
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          loadMore();
-        }
-      },
-      {
-        threshold: 0.5,
+    const handleScroll = () => {
+      const boundary = 200; // px before reaching the bottom
+
+      const reachedBoundary =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - boundary;
+
+      if (reachedBoundary && !loading.current) {
+        loadMore();
       }
-    );
-
-    const current = loaderRef.current;
-
-    if (current) {
-      observer.observe(current);
-    }
-
-    return () => {
-      if (current) {
-        observer.unobserve(current);
-      }
-
-      observer.disconnect();
     };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (

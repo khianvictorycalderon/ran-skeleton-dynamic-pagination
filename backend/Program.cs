@@ -21,11 +21,11 @@ var app = builder.Build();
 // Middlewares
 app.UseCors();
 
-// Return a random initial 10 response
+// Return a random initial 5 response
 app.MapGet("/api/data/initial", async () =>
 {
    await Task.Delay(1500);
-   return SampleData.Cards.Take(10);
+   return SampleData.Cards.Take(5);
 });
 
 // Return a sample response (For 1 only, when user scrolls)
