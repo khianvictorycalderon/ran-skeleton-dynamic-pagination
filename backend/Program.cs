@@ -1,4 +1,6 @@
 // Builder
+using Microsoft.AspNetCore.Http.HttpResults;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
@@ -18,6 +20,16 @@ var app = builder.Build();
 
 // Middlewares
 app.UseCors();
+
+// Return a sample response
+app.MapGet("/api/data", () =>
+{
+   return new
+   {
+       Title = "asfsa",
+       Description = "safsaf"
+   };
+});
 
 // Application Runner
 app.Run();
