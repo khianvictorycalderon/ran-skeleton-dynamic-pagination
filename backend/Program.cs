@@ -1,5 +1,5 @@
 // Builder
-using Microsoft.AspNetCore.Http.HttpResults;
+using backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +24,7 @@ app.UseCors();
 // Return a sample response
 app.MapGet("/api/data", () =>
 {
-   return new
-   {
-       Title = "asfsa",
-       Description = "safsaf"
-   };
+   return SampleData.Cards[Random.Shared.Next(SampleData.Cards.Count)];
 });
 
 // Application Runner
